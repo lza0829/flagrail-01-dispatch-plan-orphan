@@ -318,3 +318,60 @@ td code, .mono {
   .英雄 { min-height: auto; padding-top: 0.4rem }
   .英雄名 { letter-spacing: 0.12em }
 }
+
+/* —— 计划核证 / 缺计划标记 / 表单 —— */
+.徽章.警 { background: var(--警底); color: var(--警) }
+.徽章.灰 { background: rgba(74,98,120,0.14); color: var(--淡) }
+.徽章.脉 { outline: 2px solid rgba(179,58,58,0.35); outline-offset: 1px }
+
+.小钮 {
+  padding: 0.28rem 0.6rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  margin: 0 0.25rem 0.25rem 0;
+  border-radius: 2px;
+}
+button.小钮.次 { padding: 0.26rem 0.58rem }
+button.小钮.警 { background: var(--警); color: #fff7f1 }
+button.小钮.警:hover { background: #a84a1f }
+
+.表单行 { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin: 0.4rem 0 }
+.表单行 label { font-size: 0.78rem; color: var(--淡); display: flex; flex-direction: column; gap: 0.2rem }
+input, select {
+  font: inherit;
+  font-size: 0.84rem;
+  padding: 0.42rem 0.55rem;
+  border: 1px solid var(--线);
+  border-radius: 2px;
+  background: rgba(255,255,255,0.85);
+  color: var(--墨);
+  min-width: 0;
+}
+input:focus, select:focus { outline: 2px solid var(--信底); border-color: var(--信) }
+.勾选 { flex-direction: row !important; align-items: center; gap: 0.35rem !important; font-size: 0.82rem !important; color: var(--墨) !important }
+.勾选 input { width: auto }
+
+.核证卡 {
+  background: var(--块);
+  border: 1px solid var(--线弱);
+  border-left: 4px solid var(--信);
+  padding: 0.8rem 1rem;
+  margin: 0.6rem 0 1rem;
+  border-radius: 2px;
+  font-size: 0.85rem;
+}
+.核证卡.坏 { border-left-color: var(--败) }
+.核证格 { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin: 0.4rem 0 }
+.核证格 b { font-family: "IBM Plex Mono", monospace }
+.段题 { margin: 1.4rem 0 0.5rem; font-size: 1.02rem; font-weight: 700; letter-spacing: 0.03em }
+.警示条 {
+  background: var(--败底);
+  border-left: 3px solid var(--败);
+  color: var(--败);
+  padding: 0.6rem 0.85rem;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.操作cell { min-width: 150px }
+.票号cell { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; word-break: break-all }

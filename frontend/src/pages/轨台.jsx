@@ -44,6 +44,14 @@ export default function 轨台() {
         </Link>
       </div>
       {讯 && <p className="讯">{讯}</p>}
+      {概 && 概.缺计划票 > 0 && (
+        <div className="警示条" style={{ maxWidth: "46rem" }}>
+          ⚠ 有 {概.缺计划票} 张「已下发却缺回读计划」票——禁止假成功：确认回读与全量晋升已闸止。
+          <Link to="/下发票" style={{ color: "inherit", fontWeight: 800, marginLeft: 8 }}>
+            去下发票核证 / 补建 →
+          </Link>
+        </div>
+      )}
       {概 && (
         <div className="轨刻">
           <span>
@@ -65,6 +73,10 @@ export default function 轨台() {
           <span>
             <i>05</i>
             <b>{概.命运条}</b>命运
+          </span>
+          <span title="回读计划行总数 / 当前可晋升票">
+            <i>06</i>
+            <b>{概.计划行 ?? 0}</b>计划行 · <b>{概.可晋升 ?? 0}</b>可晋升
           </span>
         </div>
       )}

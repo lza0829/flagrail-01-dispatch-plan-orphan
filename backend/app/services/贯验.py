@@ -22,6 +22,21 @@ def 跑贯验() -> dict:
                 "SELECT 1 FROM 开关版本 WHERE 版本键=?", (r["版本键"],)
             ).fetchone():
                 问题.append(f"悬空下发:{r['票号']}")
+        # 下发回读计划同票：已下发票必须有同票计划行。
+        # 暗孤儿（无标记却无计划）= 原始「有票无计划」假成功，必抓；
+        # 明标记悬挂票在补建前同样不算贯验通过。
+        for r in conn.execute(
+            "SELECT 票号, 缺计划 FROM 下发票 WHERE 状态='已下发'"
+        ):
+            n = conn.execute(
+                "SELECT COUNT(*) AS c FROM 回读计划行 WHERE 票号=?", (r["票号"],)
+            ).fetchone()["c"]
+            if n <= 0 and not r["缺计划"]:
+                问题.append(f"有票无计划假已下发:{r['票号']}")
+            elif n <= 0 and r["缺计划"]:
+                问题.append(f"缺计划悬挂未补建:{r['票号']}")
+            elif n > 0 and r["缺计划"]:
+                问题.append(f"缺计划标记未清除:{r['票号']}")
         # 确认回读必须对应已下发/已回滚票
         for r in conn.execute("SELECT 证号, 票号, 所见版本键, 结果 FROM 回读证 WHERE 结果='确认'"):
             t = conn.execute("SELECT * FROM 下发票 WHERE 票号=?", (r["票号"],)).fetchone()
